@@ -6,11 +6,20 @@ public class GroupI_BusinessSimulator {
     public static double calculateTotal(double price, int quantity) {
         return price * quantity;
     }
-
+    // Method: Calculates subtotal with discounts (Shivan's work)
+    public static double calculateSubtotal(int itemIndex, double price, int qty) {
+        double subtotal = price * qty;
+        if (qty == 0) return 0.0;
+        if (itemIndex == 0 && qty >= 4) return subtotal * 0.95;  // Beef: 5% off
+        if (itemIndex == 1) return subtotal;                     // Chicken: no discount
+        if (itemIndex == 2 && qty >= 5) return subtotal - 2000.0; // Pork: UGX 2,000 off
+        if (itemIndex == 3 && qty >= 3) return subtotal * 0.90;   // Goat: 10% off
+        return subtotal;
+    }
     // Method 2: Applies the correct discount
     public static double applyDiscount(String item, double total, int quantity) {
 
-        if (item.equals("Beef (kg)") && quantity >= 4) {
+        if (item.equals("Beef (kg)") && quantity >= 4) {    
             // 5% discount
             total = total - (total * 0.05);
 
