@@ -11,7 +11,27 @@ public class GroupI_BusinessSimulator {
         if (itemIndex == 3 && qty >= 3) return subtotal * 0.90;   // Goat: 10% off
         return subtotal;
     }
-   
+       // Method: Returns discount note for receipt 
+    public static String getDiscountNote(int itemIndex, int qty) {
+        if (itemIndex == 0 && qty >= 4) return "(5% discount applied)";
+        if (itemIndex == 1) return "(no deal)";
+        if (itemIndex == 2 && qty >= 5) return "(UGX 2,000 discount applied)";
+        if (itemIndex == 3 && qty >= 3) return "(10% discount applied)";
+        return "(no discount)";
+    }
+        // Method: Prints the receipt (Jimmy's work)
+    public static void printReceipt(String[] items, double[] prices, int[] quantities) {
+        System.out.println("==== RECEIPT ====");
+        double grandTotal = 0.0;
+        for (int i = 0; i < items.length; i++) {
+            double subtotal = calculateSubtotal(i, prices[i], quantities[i]);
+            grandTotal += subtotal;
+            System.out.printf("%-15s x%d = UGX %.2f \t %s%n",
+                    items[i], quantities[i], subtotal, getDiscountNote(i, quantities[i]));
+        }
+        System.out.println("----------------------------------------");
+        System.out.printf("TOTAL           = UGX %.2f%n", grandTotal);
+    }
     public static void main(String[] args) {
 
         // Arrays storing item names and prices
