@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class GroupI_BusinessSimulator {
 
     // Method 1: Calculates the total price before discount
@@ -28,37 +30,83 @@ public class GroupI_BusinessSimulator {
         return total;
     }
 
-    public static String getDiscountNote(int itemIndex, int qty) {
-        if (itemIndex == 0 && qty >= 4) return "(5% discount applied)";
-        if (itemIndex == 1) return "(no deal)";
-        if (itemIndex == 2 && qty >= 5) return "(UGX 2,000 discount applied)";
-        if (itemIndex == 3 && qty >= 3) return "(10% discount applied)";
-        return "(no discount)";
-    }
-
-    public static void printReceipt(String[] items, double[] prices, int[] quantities) {
-        System.out.println("==== RECEIPT ====");
-        double grandTotal = 0.0;
-        for (int i = 0; i < items.length; i++) {
-            double subtotal = applyDiscount(items[i], calculateTotal(prices[i], quantities[i]), quantities[i]);
-            grandTotal += subtotal;
-            System.out.printf("%-15s x%d = UGX %.2f \t %s%n",
-                    items[i], quantities[i], subtotal, getDiscountNote(i, quantities[i]));
-        }
-        System.out.println("----------------------------------------");
-        System.out.printf("TOTAL           = UGX %.2f%n", grandTotal);
-    }
-
     public static void main(String[] args) {
-        String[] items = {"Beef (kg)", "Chicken (kg)", "Pork (kg)", "Goat Meat (kg)"};
-        double[] prices = {14000.00, 12000.00, 11000.00, 15000.00};
-        int[] quantities = {3, 2, 4, 3};
 
-        System.out.println("==== FRESHCUT BUTCHERY ====");
+        Scanner input = new Scanner(System.in);
+
+        // Arrays storing item names and prices
+        String[] items = {
+            "Beef (kg)",
+            "Chicken (kg)",
+            "Pork (kg)",
+            "Goat Meat (kg)"
+        };
+
+        double[] prices = {
+            14000,
+            12000,
+            11000,
+            15000
+        };
+
+        // Array to store quantities
+        int[] quantities = new int[items.length];
+
+        // Array to store final totals
+        double[] totals = new double[items.length];
+
+        // Display price list using a loop
+        System.out.println("===== FRESHCUT BUTCHERY =====");
+        System.out.println("PRICE LIST");
+
         for (int i = 0; i < items.length; i++) {
-            System.out.printf("%d. %-15s UGX %.2f%n", i + 1, items[i], prices[i]);
+            System.out.printf("%d. %-15s UGX %.2f%n",
+                    i + 1, items[i], prices[i]);
         }
+
         System.out.println();
-        printReceipt(items, prices, quantities);
+
+        // Ask the user for quantities
+        for (int i = 0; i < items.length; i++) {
+            System.out.print("Enter quantity of " + items[i] + ": ");
+            quantities[i] = input.nextInt();
+
+            double itemTotal = calculateTotal(prices[i], quantities[i]);
+
+            totals[i] = applyDiscount(
+                    items[i],
+                    itemTotal,
+                    quantities[i]
+            );
+        }
+
+        // Calculate grand total
+        double grandTotal = 0;
+
+        for (int i = 0; i < items.length; i++) {
+            grandTotal += totals[i];
+        }
+
+        // Display receipt
+        System.out.println();
+        System.out.println("========== RECEIPT ==========");
+
+        for (int i = 0; i < items.length; i++) {
+
+            if (quantities[i] > 0) {
+                System.out.printf(
+                    "%-15s %d kg   UGX %.2f%n",
+                    items[i],
+                    quantities[i],
+                    totals[i]
+                );
+            }
+        }
+
+        System.out.println("-----------------------------");
+        System.out.printf("TOTAL:          UGX %.2f%n", grandTotal);
+        System.out.println("=============================");
+
+        input.close();
     }
 }
