@@ -87,18 +87,21 @@ public class GroupI_BusinessSimulator {
             grandTotal += totals[i];
         }
 
-        // Display receipt
+                // Display receipt (Evelyn's work)
         System.out.println();
         System.out.println("========== RECEIPT ==========");
+        double grandTotal = 0.0;
 
         for (int i = 0; i < items.length; i++) {
-
             if (quantities[i] > 0) {
+                double subtotal = calculateSubtotal(i, prices[i], quantities[i]);
+                grandTotal += subtotal;
                 System.out.printf(
-                    "%-15s %d kg   UGX %.2f%n",
+                    "%-15s x%d = UGX %.2f \t %s%n",
                     items[i],
                     quantities[i],
-                    totals[i]
+                    subtotal,
+                    getDiscountNote(i, quantities[i])
                 );
             }
         }
@@ -106,7 +109,3 @@ public class GroupI_BusinessSimulator {
         System.out.println("-----------------------------");
         System.out.printf("TOTAL:          UGX %.2f%n", grandTotal);
         System.out.println("=============================");
-
-        input.close();
-    }
-}
