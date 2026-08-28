@@ -12,10 +12,6 @@ public class GroupI_BusinessSimulator {
             // 5% discount
             total = total - (total * 0.05);
 
-        } else if (item.equals("Chicken (kg)")) {
-            // No discount
-            total = total;
-
         } else if (item.equals("Pork (kg)") && quantity >= 5) {
             // UGX 2,000 discount
             total = total - 2000;
