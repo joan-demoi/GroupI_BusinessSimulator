@@ -1,6 +1,23 @@
 public class GroupI_BusinessSimulator {
 
-    // Method: Calculates subtotal with discounts 
+    // 1. Data arrays declared at the top (class-level fields)
+    static String[] items = {
+        "Beef (kg)",
+        "Chicken (kg)",
+        "Pork (kg)",
+        "Goat Meat (kg)"
+    };
+
+    static double[] prices = {
+        14000,
+        12000,
+        11000,
+        15000
+    };
+
+    static int[] quantities = {3, 2, 4, 3};
+
+    // 2. Calculation and helper methods
     public static double calculateSubtotal(int itemIndex, double price, int qty) {
         double subtotal = price * qty;
         if (qty == 0) return 0.0;
@@ -11,16 +28,14 @@ public class GroupI_BusinessSimulator {
         return subtotal;
     }
 
-    // Method: Returns discount note for receipt 
     public static String getDiscountNote(int itemIndex, int qty) {
         if (itemIndex == 0 && qty >= 4) return "(5% discount applied)";
-        if (itemIndex == 1) return "(no discount)";               // Consistent wording
+        if (itemIndex == 1) return "(no discount)";
         if (itemIndex == 2 && qty >= 5) return "(UGX 2,000 discount applied)";
         if (itemIndex == 3 && qty >= 3) return "(10% discount applied)";
         return "(no discount)";
     }
 
-    // Method: Prints the receipt (Jimmy's work)
     public static void printReceipt(String[] items, double[] prices, int[] quantities) {
         System.out.println("==== RECEIPT ====");
         double grandTotal = 0.0;
@@ -34,27 +49,8 @@ public class GroupI_BusinessSimulator {
         System.out.printf("TOTAL           = UGX %.2f%n", grandTotal);
     }
 
+    // 3. Execution entry point
     public static void main(String[] args) {
-
-        // Arrays storing item names and prices
-        String[] items = {
-            "Beef (kg)",
-            "Chicken (kg)",
-            "Pork (kg)",
-            "Goat Meat (kg)"
-        };
-
-        double[] prices = {
-            14000,
-            12000,
-            11000,
-            15000
-        };
-
-        // Array to store quantities
-        int[] quantities = {3, 2, 4, 3};
-
-        // Display price list using a loop
         System.out.println("===== FRESHCUT BUTCHERY =====");
         System.out.println("PRICE LIST");
 
@@ -63,8 +59,6 @@ public class GroupI_BusinessSimulator {
         }
 
         System.out.println();
-
-        // Display receipt 
         printReceipt(items, prices, quantities);
-    } // Closes main method
-} // Closes class definition
+    }
+}
