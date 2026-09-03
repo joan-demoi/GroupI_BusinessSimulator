@@ -4,9 +4,9 @@ public class GroupI_BusinessSimulator {
     public static double calculateSubtotal(int itemIndex, double price, int qty) {
         double subtotal = price * qty;
         if (qty == 0) return 0.0;
-        if (itemIndex == 0 && qty >= 4) return subtotal * 0.95;  // Beef: 5% off
-        if (itemIndex == 1) return subtotal;                     // Chicken: no discount
-        if (itemIndex == 2 && qty >= 5) return subtotal - 2000.0; // Pork: UGX 2,000 off
+        if (itemIndex == 0 && qty >= 4) return subtotal * 0.95;   // Beef: 5% off
+        if (itemIndex == 1) return subtotal;                      // Chicken: no discount
+        if (itemIndex == 2 && qty >= 5) return subtotal - 2000.0;  // Pork: UGX 2,000 off
         if (itemIndex == 3 && qty >= 3) return subtotal * 0.90;   // Goat: 10% off
         return subtotal;
     }
@@ -14,7 +14,7 @@ public class GroupI_BusinessSimulator {
     // Method: Returns discount note for receipt 
     public static String getDiscountNote(int itemIndex, int qty) {
         if (itemIndex == 0 && qty >= 4) return "(5% discount applied)";
-        if (itemIndex == 1) return "(no deal)";
+        if (itemIndex == 1) return "(no discount)";               // Consistent wording
         if (itemIndex == 2 && qty >= 5) return "(UGX 2,000 discount applied)";
         if (itemIndex == 3 && qty >= 3) return "(10% discount applied)";
         return "(no discount)";
@@ -59,8 +59,7 @@ public class GroupI_BusinessSimulator {
         System.out.println("PRICE LIST");
 
         for (int i = 0; i < items.length; i++) {
-            System.out.printf("%d. %-15s UGX %.2f%n",
-                    i + 1, items[i], prices[i]);
+            System.out.printf("%d. %-15s UGX %.2f%n", (i + 1), items[i], prices[i]);
         }
 
         System.out.println();
