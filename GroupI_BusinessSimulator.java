@@ -1,4 +1,3 @@
-
 public class GroupI_BusinessSimulator {
 
     // Method: Calculates subtotal with discounts 
@@ -11,7 +10,8 @@ public class GroupI_BusinessSimulator {
         if (itemIndex == 3 && qty >= 3) return subtotal * 0.90;   // Goat: 10% off
         return subtotal;
     }
-       // Method: Returns discount note for receipt 
+
+    // Method: Returns discount note for receipt 
     public static String getDiscountNote(int itemIndex, int qty) {
         if (itemIndex == 0 && qty >= 4) return "(5% discount applied)";
         if (itemIndex == 1) return "(no deal)";
@@ -19,7 +19,8 @@ public class GroupI_BusinessSimulator {
         if (itemIndex == 3 && qty >= 3) return "(10% discount applied)";
         return "(no discount)";
     }
-        // Method: Prints the receipt (Jimmy's work)
+
+    // Method: Prints the receipt (Jimmy's work)
     public static void printReceipt(String[] items, double[] prices, int[] quantities) {
         System.out.println("==== RECEIPT ====");
         double grandTotal = 0.0;
@@ -32,6 +33,7 @@ public class GroupI_BusinessSimulator {
         System.out.println("----------------------------------------");
         System.out.printf("TOTAL           = UGX %.2f%n", grandTotal);
     }
+
     public static void main(String[] args) {
 
         // Arrays storing item names and prices
@@ -50,7 +52,7 @@ public class GroupI_BusinessSimulator {
         };
 
         // Array to store quantities
-             int[] quantities = {3, 2, 4, 3};
+        int[] quantities = {3, 2, 4, 3};
 
         // Display price list using a loop
         System.out.println("===== FRESHCUT BUTCHERY =====");
@@ -63,5 +65,7 @@ public class GroupI_BusinessSimulator {
 
         System.out.println();
 
-            // Display receipt 
-               printReceipt(items, prices, quantities);
+        // Display receipt 
+        printReceipt(items, prices, quantities);
+    } // Closes main method
+} // Closes class definition
